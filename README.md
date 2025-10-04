@@ -191,3 +191,5 @@ MIT
 - Next.js 15+ 기반
 - Notion API 활용
 - TypeScript로 작성
+
+# Force redeploy
