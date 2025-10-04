@@ -100,8 +100,9 @@ export async function POST(request: NextRequest) {
       importantColor: theme.importantColor,
     };
     
-    // Base64 인코딩 (URL-safe)
-    const encodedConfig = Buffer.from(JSON.stringify(simpleConfig))
+    // Base64 인코딩 (URL-safe) - UTF-8 명시적 처리
+    const jsonString = JSON.stringify(simpleConfig);
+    const encodedConfig = Buffer.from(jsonString, 'utf8')
       .toString('base64')
       .replace(/\+/g, '-')
       .replace(/\//g, '_')
