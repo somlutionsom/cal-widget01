@@ -707,23 +707,21 @@ export default function OnboardingPage() {
             
             <div className="embed-code-container">
               <div className="embed-code">
-                {`<iframe src="${embedUrl}" width="100%" height="400" frameborder="0"></iframe>`}
+                {embedUrl}
               </div>
               <button
                 className="copy-button"
                 onClick={() => {
-                  navigator.clipboard.writeText(
-                    `<iframe src="${embedUrl}" width="100%" height="400" frameborder="0"></iframe>`
-                  );
-                  alert('클립보드에 복사되었습니다!');
+                  navigator.clipboard.writeText(embedUrl);
+                  alert('URL이 클립보드에 복사되었습니다!');
                 }}
               >
-                📋 복사
+                📋 URL 복사
               </button>
             </div>
             
             <p className="help-text" style={{ marginTop: '0.5rem' }}>
-              Notion에서 /embed 명령어를 입력하고 위 코드를 붙여넣으세요.
+              Notion에서 /embed 명령어를 입력하고 위 URL을 붙여넣으세요.
             </p>
             
             <button
