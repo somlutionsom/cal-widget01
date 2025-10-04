@@ -51,18 +51,28 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: '/:path*',
-        headers: securityHeaders,
-      },
-      {
-        // 위젯 임베드 허용 설정 (Notion 전용)
+        // 위젯 임베드 허용 설정 (Notion 전용) - X-Frame-Options 제거
         source: '/u/:path*',
-        headers: widgetHeaders,
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+        ],
       },
       {
         // embed 경로도 동일하게 처리
         source: '/embed/:path*',
-        headers: widgetHeaders,
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+        ],
+      },
+      {
+        source: '/:path*',
+        headers: securityHeaders,
       },
     ];
   },
