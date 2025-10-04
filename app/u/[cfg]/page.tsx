@@ -7,7 +7,6 @@
 'use client';
 
 import React, { useState, use } from 'react';
-import Head from 'next/head';
 import { SimpleCalendar } from '@/app/components/SimpleCalendar';
 import { ErrorBoundary } from '@/app/components/ErrorBoundary';
 import { WidgetConfig } from '@/lib/types';
@@ -94,35 +93,28 @@ export default function WidgetPage({ params }: PageProps) {
   }
   
   return (
-    <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Calendar Widget" />
-      </Head>
+    <div style={{
+      width: '100%',
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+      padding: '0.5rem',
+      background: 'transparent',
+    }}>
       <div style={{
         width: '100%',
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        padding: '0.5rem',
-        background: 'transparent',
+        maxWidth: '600px',
       }}>
-        <div style={{
-          width: '100%',
-          maxWidth: '600px',
-        }}>
-          <ErrorBoundary>
-            <SimpleCalendar
-              configId="embedded"
-              config={config}
-              theme={config.theme}
-            />
-          </ErrorBoundary>
-        </div>
+        <ErrorBoundary>
+          <SimpleCalendar
+            configId="embedded"
+            config={config}
+            theme={config.theme}
+          />
+        </ErrorBoundary>
       </div>
-    </>
+    </div>
   );
 }
 
