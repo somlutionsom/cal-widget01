@@ -190,12 +190,8 @@ export default function OnboardingPage() {
           .replace(/=/g, '');
         const encodedConfig = base64String;
       
-      // Production URL 사용 (preview 배포는 iframe이 차단됨)
-      const hostname = window.location.hostname;
-      const isPreview = hostname.includes('-') && hostname.includes('.vercel.app');
-      const baseUrl = isPreview 
-        ? `https://cal-widget01.vercel.app`  // 항상 올바른 production URL 사용
-        : window.location.origin;
+      // Production URL 사용 - 항상 고정된 URL 사용
+      const baseUrl = 'https://cal-widget01.vercel.app';
       const previewUrl = `${baseUrl}/u/${encodedConfig}`;
       
       setEmbedUrl(previewUrl);

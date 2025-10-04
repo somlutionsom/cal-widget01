@@ -108,24 +108,9 @@ export async function POST(request: NextRequest) {
       .replace(/\//g, '_')
       .replace(/=/g, '');
     
-    // Production URL 가져오기 (Preview 배포는 iframe이 차단되므로 Production만 사용)
-    let baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://cal-widget01.vercel.app';
-    
-    if (!process.env.NEXT_PUBLIC_BASE_URL) {
-      // NEXT_PUBLIC_BASE_URL이 없으면 요청 헤더에서 추출
-      const host = request.headers.get('host') || '';
-      const protocol = request.headers.get('x-forwarded-proto') || 'http';
-      
-      // Vercel preview 배포 감지 및 production URL로 변환
-      if (host.includes('-') && host.includes('.vercel.app')) {
-        // preview URL을 production URL로 변환
-        const projectName = host.split('-')[0];
-        baseUrl = `https://${projectName}.vercel.app`;
-      } else if (host) {
-        baseUrl = `${protocol}://${host}`;
-      }
-      // host가 없으면 기본값 사용 (https://cal-widget01.vercel.app)
-    }
+    // Production URL 가져오기 - 항상 고정된 production URL 사용
+    // Vercel 환경변수나 헤더 파싱이 불안정하므로 하드코딩
+    const baseUrl = 'https://cal-widget01.vercel.app';
     
     const embedUrl = `${baseUrl}/u/${encodedConfig}`;
     
