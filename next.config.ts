@@ -7,9 +7,10 @@
 import type { NextConfig } from "next";
 
 const securityHeaders = [
+  // X-Frame-Options는 제거 (CSP를 우선 사용)
   {
-    key: 'X-Frame-Options',
-    value: 'SAMEORIGIN',
+    key: 'Content-Security-Policy',
+    value: "frame-ancestors 'self' https://www.notion.so https://notion.so https://*.notion.site;",
   },
   {
     key: 'X-Content-Type-Options',
@@ -17,31 +18,11 @@ const securityHeaders = [
   },
   {
     key: 'Referrer-Policy',
-    value: 'origin-when-cross-origin',
-  },
-  {
-    key: 'X-XSS-Protection',
-    value: '1; mode=block',
+    value: 'strict-origin-when-cross-origin',
   },
   {
     key: 'X-DNS-Prefetch-Control',
     value: 'on',
-  },
-  {
-    key: 'Strict-Transport-Security',
-    value: 'max-age=31536000; includeSubDomains',
-  },
-  {
-    key: 'Permissions-Policy',
-    value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
-  },
-];
-
-// 위젯 임베드용 헤더 (Notion 호환) - 최소한의 헤더만
-const widgetHeaders = [
-  {
-    key: 'X-Content-Type-Options',
-    value: 'nosniff',
   },
 ];
 
@@ -50,26 +31,6 @@ const nextConfig: NextConfig = {
   
   async headers() {
     return [
-      {
-        // 위젯 임베드 허용 설정 (Notion 전용) - X-Frame-Options 제거
-        source: '/u/:path*',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-        ],
-      },
-      {
-        // embed 경로도 동일하게 처리
-        source: '/embed/:path*',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-        ],
-      },
       {
         source: '/:path*',
         headers: securityHeaders,
