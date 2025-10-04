@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     
     // Notion 설정 검증
-    const validationResult = validateNotionConfig(body);
+    const validationResult = validateNotionConfig(body.notionConfig);
     if (!validationResult.success) {
       return NextResponse.json<ApiResponse<never>>({
         success: false,

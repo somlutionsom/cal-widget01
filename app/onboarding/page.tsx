@@ -216,8 +216,14 @@ export default function OnboardingPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...formData,
-          scheduleProperties: formData.scheduleProperties.filter(p => p.trim()),
+          notionConfig: {
+            apiKey: formData.apiKey,
+            databaseId: formData.databaseId,
+            dateProperty: formData.dateProperty,
+            titleProperty: formData.titleProperty,
+            scheduleProperties: formData.scheduleProperties.filter(p => p.trim()),
+            importantProperty: formData.importantProperty,
+          },
           theme: {
             primaryColor: formData.primaryColor,
             accentColor: formData.accentColor,
