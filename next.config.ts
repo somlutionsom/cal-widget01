@@ -37,6 +37,34 @@ const securityHeaders = [
   },
 ];
 
+// 위젯 임베드용 헤더 (Notion 호환)
+const widgetHeaders = [
+  {
+    key: 'X-Content-Type-Options',
+    value: 'nosniff',
+  },
+  {
+    key: 'Referrer-Policy',
+    value: 'origin-when-cross-origin',
+  },
+  {
+    key: 'X-DNS-Prefetch-Control',
+    value: 'on',
+  },
+  {
+    key: 'Content-Security-Policy',
+    value: "frame-ancestors *; default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.notion.com;",
+  },
+  {
+    key: 'Access-Control-Allow-Origin',
+    value: '*',
+  },
+  {
+    key: 'Access-Control-Allow-Methods',
+    value: 'GET, OPTIONS',
+  },
+];
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   
@@ -47,9 +75,14 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
       {
-        // iframe 임베드 허용 설정 - X-Frame-Options 완전 제거
+        // 위젯 임베드 허용 설정 (Notion 전용)
         source: '/u/:path*',
-        headers: securityHeaders.filter(h => h.key !== 'X-Frame-Options'),
+        headers: widgetHeaders,
+      },
+      {
+        // embed 경로도 동일하게 처리
+        source: '/embed/:path*',
+        headers: widgetHeaders,
       },
     ];
   },
