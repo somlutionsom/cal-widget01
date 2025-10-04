@@ -37,31 +37,11 @@ const securityHeaders = [
   },
 ];
 
-// 위젯 임베드용 헤더 (Notion 호환)
+// 위젯 임베드용 헤더 (Notion 호환) - 최소한의 헤더만
 const widgetHeaders = [
   {
     key: 'X-Content-Type-Options',
     value: 'nosniff',
-  },
-  {
-    key: 'Referrer-Policy',
-    value: 'origin-when-cross-origin',
-  },
-  {
-    key: 'X-DNS-Prefetch-Control',
-    value: 'on',
-  },
-  {
-    key: 'Content-Security-Policy',
-    value: "frame-ancestors *; default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.notion.com;",
-  },
-  {
-    key: 'Access-Control-Allow-Origin',
-    value: '*',
-  },
-  {
-    key: 'Access-Control-Allow-Methods',
-    value: 'GET, OPTIONS',
   },
 ];
 
