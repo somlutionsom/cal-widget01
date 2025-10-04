@@ -194,7 +194,7 @@ export default function OnboardingPage() {
       const hostname = window.location.hostname;
       const isPreview = hostname.includes('-') && hostname.includes('.vercel.app');
       const baseUrl = isPreview 
-        ? `https://${hostname.split('-')[0]}.vercel.app` 
+        ? `https://cal-widget01.vercel.app`  // 항상 올바른 production URL 사용
         : window.location.origin;
       const previewUrl = `${baseUrl}/u/${encodedConfig}`;
       
