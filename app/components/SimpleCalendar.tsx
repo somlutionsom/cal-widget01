@@ -238,7 +238,15 @@ export function SimpleCalendar({
       <style jsx>{`
         .calendar-widget {
           font-family: ${theme?.fontFamily || 'system-ui, -apple-system, sans-serif'};
-          background: white;
+          background: ${(() => {
+            const bgColor = theme?.backgroundColor || '#ffffff';
+            const opacity = (theme?.backgroundOpacity ?? 100) / 100;
+            // hex to rgba 변환
+            const r = parseInt(bgColor.slice(1, 3), 16);
+            const g = parseInt(bgColor.slice(3, 5), 16);
+            const b = parseInt(bgColor.slice(5, 7), 16);
+            return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+          })()};
           border-radius: 0.5rem;
           padding: 0.6rem;
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -246,6 +254,7 @@ export function SimpleCalendar({
           width: 60%;
           margin: 0 auto;
           user-select: none;
+          height: fit-content;
         }
         
         .calendar-header {

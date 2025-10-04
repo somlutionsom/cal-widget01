@@ -50,6 +50,8 @@ export interface ThemeConfig {
   accentColor?: string;
   importantColor?: string;
   fontFamily?: string;
+  backgroundColor?: string;
+  backgroundOpacity?: number; // 0-100
 }
 
 // 캘린더 뷰 타입

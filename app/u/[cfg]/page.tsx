@@ -58,6 +58,8 @@ export default function WidgetPage({ params }: PageProps) {
           accentColor: decodedData.accentColor,
           importantColor: decodedData.importantColor,
           fontFamily: 'system-ui, -apple-system, sans-serif',
+          backgroundColor: decodedData.backgroundColor,
+          backgroundOpacity: decodedData.backgroundOpacity,
         },
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -95,17 +97,18 @@ export default function WidgetPage({ params }: PageProps) {
   return (
     <div style={{
       width: '100%',
-      height: '450px',
+      height: '100vh',
       display: 'flex',
-      alignItems: 'flex-start',
+      alignItems: 'center',
       justifyContent: 'center',
-      padding: '0.5rem',
+      padding: '0',
       background: 'transparent',
       overflow: 'hidden',
     }}>
       <div style={{
         width: '100%',
         maxWidth: '600px',
+        height: 'fit-content',
       }}>
         <ErrorBoundary>
           <SimpleCalendar

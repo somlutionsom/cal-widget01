@@ -98,6 +98,8 @@ export async function POST(request: NextRequest) {
       primaryColor: theme.primaryColor,
       accentColor: theme.accentColor,
       importantColor: theme.importantColor,
+      backgroundColor: theme.backgroundColor,
+      backgroundOpacity: theme.backgroundOpacity,
     };
     
     // Base64 인코딩 (URL-safe) - UTF-8 명시적 처리

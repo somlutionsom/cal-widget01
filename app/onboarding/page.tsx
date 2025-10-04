@@ -34,6 +34,8 @@ export default function OnboardingPage() {
     primaryColor: '#4A5568',
     accentColor: '#ED64A6',
     importantColor: '#ED64A6',
+    backgroundColor: '#FFFFFF',
+    backgroundOpacity: 100,
   });
 
   const handleInputChange = (field: string, value: string) => {
@@ -179,6 +181,8 @@ export default function OnboardingPage() {
         primaryColor: formData.primaryColor,
         accentColor: formData.accentColor,
         importantColor: formData.importantColor,
+        backgroundColor: formData.backgroundColor,
+        backgroundOpacity: formData.backgroundOpacity,
       };
       
         // Base64 인코딩하여 미리보기 URL 생성 (URL-safe, UTF-8 지원)
@@ -224,6 +228,8 @@ export default function OnboardingPage() {
             primaryColor: formData.primaryColor,
             accentColor: formData.accentColor,
             importantColor: formData.importantColor,
+            backgroundColor: formData.backgroundColor,
+            backgroundOpacity: formData.backgroundOpacity,
           },
         }),
       });
@@ -654,6 +660,29 @@ export default function OnboardingPage() {
               />
             </div>
             
+            <div className="form-group">
+              <label htmlFor="backgroundColor">배경 색상</label>
+              <input
+                id="backgroundColor"
+                type="color"
+                value={formData.backgroundColor}
+                onChange={(e) => handleInputChange('backgroundColor', e.target.value)}
+              />
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="backgroundOpacity">배경 투명도: {formData.backgroundOpacity}%</label>
+              <input
+                id="backgroundOpacity"
+                type="range"
+                min="0"
+                max="100"
+                value={formData.backgroundOpacity}
+                onChange={(e) => handleInputChange('backgroundOpacity', e.target.value)}
+                style={{ width: '100%' }}
+              />
+            </div>
+            
             {previewMode && (
               <div className="preview-container">
                 <h3>미리보기</h3>
@@ -663,6 +692,8 @@ export default function OnboardingPage() {
                     primaryColor: formData.primaryColor,
                     accentColor: formData.accentColor,
                     importantColor: formData.importantColor,
+                    backgroundColor: formData.backgroundColor,
+                    backgroundOpacity: formData.backgroundOpacity,
                   }}
                 />
               </div>
