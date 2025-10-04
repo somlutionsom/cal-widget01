@@ -722,9 +722,26 @@ export default function OnboardingPage() {
               </button>
             </div>
             
-            <p className="help-text" style={{ marginTop: '0.5rem' }}>
-              Notion에서 /embed 명령어를 입력하고 위 URL을 붙여넣으세요.
-            </p>
+            <div style={{ 
+              marginTop: '1rem', 
+              padding: '1rem', 
+              background: '#f0f9ff', 
+              borderRadius: '8px',
+              border: '1px solid #0ea5e9'
+            }}>
+              <p style={{ fontWeight: 'bold', marginBottom: '0.5rem', color: '#0369a1' }}>
+                📌 Notion에 추가하는 방법:
+              </p>
+              <ol style={{ margin: '0.5rem 0', paddingLeft: '1.5rem', color: '#0c4a6e' }}>
+                <li>Notion 페이지에서 <code>/embed</code> 입력</li>
+                <li>위 URL 붙여넣기</li>
+                <li>"링크 임베드" 선택</li>
+                <li>위젯이 표시됩니다!</li>
+              </ol>
+              <p style={{ fontSize: '0.875rem', color: '#64748b', marginTop: '0.5rem' }}>
+                ⚠️ 북마크로 표시되면: 북마크 위에서 우클릭 → "미리보기 표시" 선택
+              </p>
+            </div>
             
             <button
               className="btn-primary"
