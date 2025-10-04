@@ -108,10 +108,23 @@ export async function POST(request: NextRequest) {
       .replace(/\//g, '_')
       .replace(/=/g, '');
     
-    // 배포 URL 가져오기 (Vercel 환경 변수 우선, 없으면 요청 헤더에서 추출)
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
-                    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
-                    `${request.headers.get('x-forwarded-proto') || 'http'}://${request.headers.get('host')}`;
+    // Production URL 가져오기 (Preview 배포는 iframe이 차단되므로 Production만 사용)
+    let baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    
+    if (!baseUrl) {
+      // NEXT_PUBLIC_BASE_URL이 없으면 요청 헤더에서 추출
+      const host = request.headers.get('host') || '';
+      const protocol = request.headers.get('x-forwarded-proto') || 'http';
+      
+      // Vercel preview 배포 감지 및 production URL로 변환
+      if (host.includes('-') && host.includes('.vercel.app')) {
+        // preview URL을 production URL로 변환
+        const projectName = host.split('-')[0];
+        baseUrl = `https://${projectName}.vercel.app`;
+      } else {
+        baseUrl = `${protocol}://${host}`;
+      }
+    }
     
     const embedUrl = `${baseUrl}/u/${encodedConfig}`;
     
