@@ -735,11 +735,11 @@ export default function OnboardingPage() {
               <ol style={{ margin: '0.5rem 0', paddingLeft: '1.5rem', color: '#0c4a6e' }}>
                 <li>Notion 페이지에서 <code>/embed</code> 입력</li>
                 <li>위 URL 붙여넣기</li>
-                <li>"링크 임베드" 선택</li>
+                <li>&quot;링크 임베드&quot; 선택</li>
                 <li>위젯이 표시됩니다!</li>
               </ol>
               <p style={{ fontSize: '0.875rem', color: '#64748b', marginTop: '0.5rem' }}>
-                ⚠️ 북마크로 표시되면: 북마크 위에서 우클릭 → "미리보기 표시" 선택
+                ⚠️ 북마크로 표시되면: 북마크 위에서 우클릭 → &quot;미리보기 표시&quot; 선택
               </p>
             </div>
             
