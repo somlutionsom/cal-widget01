@@ -95,12 +95,13 @@ export default function WidgetPage({ params }: PageProps) {
   return (
     <div style={{
       width: '100%',
-      minHeight: '100vh',
+      height: '450px',
       display: 'flex',
       alignItems: 'flex-start',
       justifyContent: 'center',
       padding: '0.5rem',
       background: 'transparent',
+      overflow: 'hidden',
     }}>
       <div style={{
         width: '100%',
