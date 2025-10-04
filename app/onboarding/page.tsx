@@ -189,7 +189,10 @@ export default function OnboardingPage() {
           .replace(/\//g, '_')
           .replace(/=/g, '');
         const encodedConfig = base64String;
-      const previewUrl = `/u/${encodedConfig}`;
+      
+      // 현재 호스트 URL 가져오기
+      const baseUrl = window.location.origin;
+      const previewUrl = `${baseUrl}/u/${encodedConfig}`;
       
       setEmbedUrl(previewUrl);
       setPreviewMode(true);

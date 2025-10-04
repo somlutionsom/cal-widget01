@@ -106,7 +106,13 @@ export async function POST(request: NextRequest) {
       .replace(/\+/g, '-')
       .replace(/\//g, '_')
       .replace(/=/g, '');
-    const embedUrl = `${process.env.NEXT_PUBLIC_BASE_URL || ''}/u/${encodedConfig}`;
+    
+    // 배포 URL 가져오기 (Vercel 환경 변수 우선, 없으면 요청 헤더에서 추출)
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
+                    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
+                    `${request.headers.get('x-forwarded-proto') || 'http'}://${request.headers.get('host')}`;
+    
+    const embedUrl = `${baseUrl}/u/${encodedConfig}`;
     
     // 성공 응답
     return NextResponse.json<ApiResponse<{ configId: string; embedUrl: string }>>({
