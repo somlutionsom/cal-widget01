@@ -213,8 +213,15 @@ export function SimpleCalendar({
   // 날짜 클릭 처리
   const handleDateClick = (dateInfo: DateInfo) => {
     const dateEvents = events.get(dateInfo.dateString) || [];
-    if (dateEvents.length > 0 && dateEvents[0].pageUrl) {
-      window.open(dateEvents[0].pageUrl, '_blank');
+    if (dateEvents.length > 0) {
+      // 모바일에서는 툴팁만 표시, 데스크톱에서는 Notion 페이지 열기
+      const isMobile = window.innerWidth <= 768;
+      if (!isMobile && dateEvents[0].pageUrl) {
+        window.open(dateEvents[0].pageUrl, '_blank');
+      } else {
+        // 모바일에서는 툴팁 표시
+        setHoveredDate(dateInfo.dateString);
+      }
     }
   };
 
@@ -251,9 +258,9 @@ export function SimpleCalendar({
         }
         
         .month-year {
-          font-size: 1.1rem;
+          font-size: 1.3rem;
           font-weight: 600;
-          color: #2d3748;
+          color: ${theme?.primaryColor || '#2d3748'};
           letter-spacing: -0.02em;
         }
         
@@ -264,11 +271,11 @@ export function SimpleCalendar({
         
         .nav-button {
           background: none;
-          border: 1px solid #e2e8f0;
+          border: 1px solid ${theme?.primaryColor || '#e2e8f0'};
           border-radius: 0.25rem;
           padding: 0.2rem 0.4rem;
           cursor: pointer;
-          color: #4a5568;
+          color: ${theme?.primaryColor || '#4a5568'};
           transition: all 0.2s;
           font-size: 0.7rem;
           min-width: 28px;
@@ -298,7 +305,7 @@ export function SimpleCalendar({
           text-align: center;
           font-size: 0.55rem;
           font-weight: 600;
-          color: #718096;
+          color: ${theme?.primaryColor || '#718096'};
           padding: 0.25rem 0;
         }
         
