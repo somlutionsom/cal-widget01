@@ -190,8 +190,12 @@ export default function OnboardingPage() {
           .replace(/=/g, '');
         const encodedConfig = base64String;
       
-      // 현재 호스트 URL 가져오기
-      const baseUrl = window.location.origin;
+      // Production URL 사용 (preview 배포는 iframe이 차단됨)
+      const hostname = window.location.hostname;
+      const isPreview = hostname.includes('-') && hostname.includes('.vercel.app');
+      const baseUrl = isPreview 
+        ? `https://${hostname.split('-')[0]}.vercel.app` 
+        : window.location.origin;
       const previewUrl = `${baseUrl}/u/${encodedConfig}`;
       
       setEmbedUrl(previewUrl);
