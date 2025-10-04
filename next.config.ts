@@ -47,15 +47,9 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
       {
-        // iframe 임베드 허용 설정
+        // iframe 임베드 허용 설정 - X-Frame-Options 완전 제거
         source: '/u/:path*',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'ALLOWALL', // iframe 임베드 허용
-          },
-          ...securityHeaders.filter(h => h.key !== 'X-Frame-Options'),
-        ],
+        headers: securityHeaders.filter(h => h.key !== 'X-Frame-Options'),
       },
     ];
   },
