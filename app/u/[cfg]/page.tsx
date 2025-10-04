@@ -24,10 +24,12 @@ export default function WidgetPage({ params }: PageProps) {
   // URL 파라미터에서 설정 디코딩
   React.useEffect(() => {
     try {
-      console.log('Encoded config:', encodedConfig);
+      // 브라우저가 추가한 :1 같은 부분 제거
+      const cleanConfig = encodedConfig.split(':')[0];
+      console.log('Encoded config:', cleanConfig);
       
       // URL-safe Base64 디코딩 (UTF-8 지원)
-      let base64 = encodedConfig.replace(/-/g, '+').replace(/_/g, '/');
+      let base64 = cleanConfig.replace(/-/g, '+').replace(/_/g, '/');
       while (base64.length % 4) {
         base64 += '=';
       }
